@@ -1,0 +1,15 @@
+<nav class="flex pt-[2.6vh] pl-[3vw] items-center">
+
+  @if (router.url.includes("/film-title")) {
+    <a routerLink="/" class="font-inter text-md font-semibold text-gray-700 flex gap-[0.3vw]">
+    <span class="font-medium">&larr; Home</span>
+  </a>
+    <p routerLink="/film-title" class="font-inter text-md ml-[0.3vw]">&gt; {{navService.filmTitle()}}</p>
+  } @else {
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+    <span class="ml-[0.5vw] font-lg text-md border-b-2">Home</span>
+  }
+</nav>

@@ -1,0 +1,44 @@
+<div class="flex flex-col justify-center items-center">
+    <div class="w-[80vw] border-b border-gray-200 min-h-[10vh] flex justify-center pt-[2vh]">
+        <div class="flex w-[70vw] h-[6vh] items-center bg-white border border-gray-300 rounded-md overflow-hidden shadow-xl">
+        <input
+          type="text"
+          #filter
+          class="grow px-4 py-2 text-gray-700 outline-none"
+          placeholder="Search movies..."
+          (input)="updateFilter(filter.value)"
+        />
+        </div>
+    </div>
+
+    <div class="flex flex-wrap gap-[5vw] mt-[3vh] w-[99vw] pl-[10vw] pr-[10vw] pb-[3vh] border-b-gray-300 border-b min-h-[60vh] justify-center">
+      @for (film of filteredFilms(); track film.id) {
+        <div class="p-4 rounded shadow bg-white w-[15vw] flex flex-col">
+          <a [routerLink]="['/film-title', film.id]" class="cursor-pointer">
+            <img src="{{film.posterUrl}}" alt="{{film.title}} poster">
+            <h2 class="text-xl font-bold font-inter mt-[1vh] text-indigo-900">{{ film.title }}</h2>
+          </a>
+          <div class="flex gap-[0.5vw] flex-wrap align-center mb-[1vh]">
+            <p class="text-gray-600 border-r pr-[0.35vw]">{{ film.year }}</p>
+            <p>{{film.genre}},</p>
+            <p>{{film.rating}}</p>
+          </div>
+          <button
+          class="border rounded-md pt-1 pb-1 pl-2 mt-auto pr-2 shadow border-gray-300 w-full hover:bg-gray-200 text-blue-950 font-md"
+          (click)="favoriteService.toggleFavorite(film)">
+          @if (!favoriteService.isFavorite(film.id)) {
+            Add to Favorites
+          } @else {
+            Remove from Favorites
+          }
+          </button>
+        </div>
+      } @empty {
+        <div>
+          <h3 class="font-inter text-2xl text-gray-700 text-center mt-[5vh] font-bold">Nothing found</h3>
+          <p class="font-inter text-lg text-gray-500 text-center mt-[2vh] font-medium">No movies match your search</p>
+        </div>
+      }
+    </div>
+</div>
+

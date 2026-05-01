@@ -1,0 +1,36 @@
+<div class="w-[40vw] h-[40vh]">
+<a routerLink="/" class="block cursor-pointer font-inter p-[1vh] w-[8vw] text-blue-700 border-gray-300 border bg-white shadow mt-[3vh] mr-[10vw]">
+  &larr; Back to List
+</a>
+
+@if (currentFilm()) {
+  <div class="flex mt-[3vh]">
+    <div>
+      <img [src]="currentFilm()?.posterUrl" [alt]="currentFilm()?.title" class="w-[12vw]">
+      <button (click)="favoriteService.toggleFavorite(currentFilm()!)" class="w-[12vw] font-inter text-xl border-gray-300 shadow cursor-pointer text-gray-900 border mt-[2vh] p-1">
+        @if (favoriteService.isFavorite(currentFilm()!.id)) {
+          &#10084;
+        }
+        @else {
+          &#9825;
+        }
+        Add to Favorites
+      </button>
+    </div>
+    <div class="ml-[3vw]">
+    <h1 class="font-inter text-2xl text-gray-800 font-bold">{{ currentFilm()?.title }}</h1>
+    <ul class="font-inter flex gap-[0.5vw] mt-[1vh] text-lg items-center h-[4vh]">
+      <li class="mt-[0.3vh]">{{ currentFilm()?.year }}</li>
+      <li>|</li>
+      <li class="mt-[0.3vh]">{{ currentFilm()?.genre }}</li>
+      <li>|</li>
+      <li class="mt-[0.3vh]">Rating: {{ currentFilm()?.rating }}</li>
+    </ul>
+    <p class="font-inter mt-[1vh] text-lg w-full border-b border-gray-300 pb-[0.5vh]">Duration: {{ currentFilm()?.duration | duration }}</p>
+    <p class="mt-[1vh] font-inter">{{currentFilm()?.description}}</p>
+    </div>
+  </div>
+} @else {
+  <p>Загрузка данных о фильме...</p>
+}
+</div>
